@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitTrack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-teal: #0F5E5E;
+    --sage: #6FAE8B;
+    --sky: #4A90A4;
+    --mist: #EAF6F4;
+    --ink: #163332;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--ink);
+    background: var(--mist);
+  }
+
+  h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--deep-teal) 0%, var(--sky) 55%, var(--sage) 100%);
+    padding: 50px 24px 90px;
+    text-align: center;
+    color: white;
+  }
+
+  .hero nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 760px;
+    margin: 0 auto 50px;
+  }
+
+  .hero nav .brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero nav a {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 22px;
+  }
+
+  .hero nav a:hover { color: white; }
+
+  .hero h1 {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.25;
+    max-width: 480px;
+    margin: 0 auto 16px;
+  }
+
+  .hero p {
+    max-width: 420px;
+    margin: 0 auto;
+    font-size: 15px;
+    opacity: 0.92;
+    line-height: 1.6;
+  }
+
+  .wave {
+    display: block;
+    margin-top: -4px;
+  }
+
+  .cards {
+    max-width: 760px;
+    margin: -55px auto 60px;
+    padding: 0 24px;
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    width: 210px;
+    text-align: left;
+    box-shadow: 0 12px 30px -12px rgba(15, 94, 94, 0.25);
+  }
+
+  .card .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .card:nth-child(1) .icon { background: rgba(74, 144, 164, 0.12); }
+  .card:nth-child(2) .icon { background: rgba(111, 174, 139, 0.15); }
+  .card:nth-child(3) .icon { background: rgba(15, 94, 94, 0.1); }
+
+  .card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    font-size: 13.5px;
+    color: #4c6664;
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  .card a {
+    display: inline-block;
+    color: var(--deep-teal);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 2px solid var(--sage);
+    padding-bottom: 2px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 22px;
+    font-size: 13px;
+    color: #5b7674;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <nav>
+    <span class="brand">FitTrack</span>
+    <span>
+      <a href="http://localhost:5000">Home</a>
+      <a href="http://localhost:3000/login">Login</a>
+      <a href="http://localhost:5000">Register</a>
+    </span>
+  </nav>
+
+  <h1>Track your fitness journey, one day at a time</h1>
+  <p>Log workouts, watch your progress, and stay close to your goals — all in one calm, simple place.</p>
+</div>
+
+<svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" style="width:100%; height:60px;">
+  <path fill="#EAF6F4" d="M0,32 C240,80 480,0 720,24 C960,48 1200,88 1440,40 L1440,0 L0,0 Z" transform="scale(1,-1) translate(0,-80)"></path>
+</svg>
+
+<div class="cards">
+  <div class="card">
+    <div class="icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A90A4" stroke-width="2" stroke-linecap="round"><path d="M4 12h16M4 12a2 2 0 100-4M4 12a2 2 0 100 4M20 12a2 2 0 100-4M20 12a2 2 0 100 4"/></svg>
+    </div>
+    <h3>New here?</h3>
+    <p>Create your account and start tracking your first workout.</p>
+    <a href="http://localhost:5000">Register</a>
+  </div>
+
+  <div class="card">
+    <div class="icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6FAE8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg>
+    </div>
+    <h3>Already a member?</h3>
+    <p>Log back in to pick up right where you left off.</p>
+    <a href="http://localhost:3000/login">Login</a>
+  </div>
+
+  <div class="card">
+    <div class="icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F5E5E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.75l-6.16 3.24 1.18-6.88L2 9.24l6.92-1L12 2l3.08 6.24 6.92 1-5.02 4.87 1.18 6.88z"/></svg>
+    </div>
+    <h3>Have thoughts?</h3>
+    <p>A quick rating helps us make FitTrack better.</p>
+    <a href="feedback.html">Feedback</a>
+  </div>
+</div>
+
+<footer>&copy; 2026 FitTrack — built for a calmer way to stay fit.</footer>
+
+</body>
+</html>
