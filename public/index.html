@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitTrack - Registration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-teal: #0F5E5E;
+    --sage: #6FAE8B;
+    --sky: #4A90A4;
+    --mist: #EAF6F4;
+    --ink: #163332;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, var(--mist) 0%, #dcefe9 100%);
+    padding: 20px;
+  }
+  .register-box {
+    background: white;
+    max-width: 360px;
+    width: 100%;
+    padding: 36px 32px;
+    border-radius: 22px;
+    box-shadow: 0 16px 40px -16px rgba(15, 94, 94, 0.3);
+  }
+  h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--deep-teal);
+    text-align: center;
+    margin: 0 0 4px;
+  }
+  .subtext {
+    text-align: center;
+    font-size: 13.5px;
+    color: #5b7674;
+    margin-bottom: 22px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--deep-teal);
+    margin-top: 14px;
+    margin-bottom: 5px;
+  }
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #d7e6e3;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    background: #fafffe;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--sky);
+  }
+  .checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: #4c6664;
+  }
+  .checkbox-row input { width: auto; }
+  button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--deep-teal), var(--sky));
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 20px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+  }
+  button:hover { opacity: 0.92; }
+  .login-link {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 13px;
+    color: #4c6664;
+  }
+  .login-link a { color: var(--sky); text-decoration: none; font-weight: 600; }
+  #message { text-align: center; margin-top: 12px; font-size: 13.5px; min-height: 18px; }
+</style>
+</head>
+<body>
+
+<div class="register-box">
+  <h1>Create your account</h1>
+  <p class="subtext">Start your fitness journey with FitTrack</p>
+
+  <form id="registerForm">
+    <label>Full Name</label>
+    <input type="text" id="fullName" required>
+
+    <label>Email Address</label>
+    <input type="email" id="email" required>
+
+    <label>Password</label>
+    <input type="password" id="password" required>
+
+    <label>Gender</label>
+    <select id="gender" required>
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Phone Number</label>
+    <input type="tel" id="phone" required>
+
+    <div class="checkbox-row">
+      <input type="checkbox" id="terms" required>
+      <label for="terms" style="margin:0; font-weight:400; color:#4c6664;">I agree to the Terms &amp; Conditions</label>
+    </div>
+
+    <button type="submit">Create Account</button>
+    <p id="message"></p>
+  </form>
+
+  <p class="login-link">Already have an account? <a href="http://localhost:3000/login">Login here</a></p>
+</div>
+
+<script>
+  document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const formData = {
+      fullName: document.getElementById('fullName').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      gender: document.getElementById('gender').value,
+      phone: document.getElementById('phone').value
+    };
+
+    const messageBox = document.getElementById('message');
+
+    try {
+      const response = await fetch("/api/auth/register", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        messageBox.style.color = 'var(--deep-teal)';
+        messageBox.textContent = 'Account created successfully!';
+        document.getElementById('registerForm').reset();
+      } else {
+        messageBox.style.color = '#c0554f';
+        messageBox.textContent = data.error;
+      }
+    } catch (err) {
+      messageBox.style.color = '#c0554f';
+      messageBox.textContent = 'Could not reach server. Is it running?';
+    }
+  });
+</script>
+
+</body>
+</html>
