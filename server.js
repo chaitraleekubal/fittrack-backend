@@ -6,8 +6,10 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.FRONTEND_URL || '')
-  .split(',')
+const allowedOrigins = [
+  ...(process.env.FRONTEND_URL || '').split(','),
+  process.env.RENDER_EXTERNAL_URL || '',
+]
   .map((origin) => origin.trim())
   .filter(Boolean);
 
@@ -41,7 +43,8 @@ app.use((err, _req, res, _next) => {
 
 async function start() {
   if (!process.env.MONGO_URI) throw new Error('MONGO_URI must be set');
-  if (!process.env.FRONTEND_URL && process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' &&
+      !process.env.FRONTEND_URL && !process.env.RENDER_EXTERNAL_URL) {
     throw new Error('FRONTEND_URL must be set in production');
   }
   await mongoose.connect(process.env.MONGO_URI);
