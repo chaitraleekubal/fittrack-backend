@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitTrack - Feedback</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-teal: #0F5E5E;
+    --sage: #6FAE8B;
+    --sky: #4A90A4;
+    --mist: #EAF6F4;
+    --ink: #163332;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito Sans', sans-serif;
+    color: var(--ink);
+    background: linear-gradient(160deg, var(--mist) 0%, #dcefe9 100%);
+  }
+
+  .feedback-box {
+    background: white;
+    max-width: 340px;
+    width: 100%;
+    padding: 36px 30px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 16px 40px -16px rgba(15, 94, 94, 0.3);
+  }
+
+  h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--deep-teal);
+    margin: 0 0 6px;
+  }
+
+  .subtext {
+    font-size: 13.5px;
+    color: #5b7674;
+    margin-bottom: 20px;
+  }
+
+  .stars {
+    font-size: 34px;
+    letter-spacing: 6px;
+  }
+  .stars span {
+    cursor: pointer;
+    color: #d7e6e3;
+    transition: color 0.15s;
+  }
+  .stars span.active {
+    color: var(--sky);
+  }
+
+  button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--deep-teal), var(--sky));
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 22px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14.5px;
+    cursor: pointer;
+  }
+  button:hover { opacity: 0.92; }
+
+  #message { margin-top: 14px; font-size: 13.5px; min-height: 18px; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--sky);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .back-link:hover { border-bottom-color: var(--sky); }
+</style>
+</head>
+<body>
+
+<div class="feedback-box">
+  <h1>How was your experience?</h1>
+  <p class="subtext">A quick rating helps us improve FitTrack.</p>
+
+  <div class="stars" id="stars">
+    <span data-value="1">&#9733;</span>
+    <span data-value="2">&#9733;</span>
+    <span data-value="3">&#9733;</span>
+    <span data-value="4">&#9733;</span>
+    <span data-value="5">&#9733;</span>
+  </div>
+
+  <button onclick="submitFeedback()">Submit Feedback</button>
+  <p id="message"></p>
+
+  <a class="back-link" href="project.html">&larr; Back to Home</a>
+</div>
+
+<script>
+  let selectedRating = 0;
+  const stars = document.querySelectorAll('#stars span');
+
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = parseInt(star.getAttribute('data-value'));
+      highlightStars(selectedRating);
+    });
+  });
+
+  function highlightStars(rating) {
+    stars.forEach(star => {
+      const value = parseInt(star.getAttribute('data-value'));
+      star.classList.toggle('active', value <= rating);
+    });
+  }
+
+  function submitFeedback() {
+    const messageBox = document.getElementById('message');
+
+    if (selectedRating === 0) {
+      messageBox.style.color = '#c0554f';
+      messageBox.textContent = 'Please select a star rating first.';
+      return;
+    }
+
+    console.log('Feedback submitted:', { rating: selectedRating });
+
+    messageBox.style.color = 'var(--deep-teal)';
+    messageBox.textContent = 'Thank you for your feedback!';
+    selectedRating = 0;
+    highlightStars(0);
+  }
+</script>
+
+</body>
+</html>
